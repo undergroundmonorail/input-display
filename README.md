@@ -1,6 +1,8 @@
 # input-display
 simple fightstick input viewer
 
+appears always on top and at the bottom center of your display. very little configuration is possible atm but watch this space
+
 currently supports only five buttons and only left and right stick directions, because i play fs and that's just the way it is i guess
 
 fightstick with no inputs:
