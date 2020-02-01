@@ -1,16 +1,19 @@
 # Sticky Viewer
-simple fightstick input viewer
 
-appears always on top and at the bottom center of your display. very little configuration is possible atm but watch this space
+A simple XInput input viewer designed for fightsticks. Appears always-on-top.
 
-currently supports only five buttons and only left and right stick directions, because i play fs and that's just the way it is i guess
+Currently, configuration is quite limited. Check ROADMAP.md for planned updates. Most notably, exactly five remappable buttons and only left and right stick directions are supported right now, because I play Fantasy Strike and that was my priority. :P
 
-fightstick with no inputs:
+To remap buttons, open sticky_viewer.exe.config and modify the values there. If the configuration file is missing at runtime, the values used in the unmodified file are the defaults.
 
-![fightstick with no inputs](https://i.imgur.com/TcLUlLw.png)
+## Screenshots
 
-all buttons held and stick left:
+No inputs held:
 
-![all buttons held and stick left](https://i.imgur.com/GkvcVxI.png)
+![fightstick with no inputs held](https://i.imgur.com/TcLUlLw.png)
 
-a configuration file for button remapping and image files for customization are provided. if they're missing at runtime, the program defaults to the default values and images
+All buttons held and stick held left:
+
+![fightstick with all buttons held and stick held left](https://i.imgur.com/GkvcVxI.png)
+
+The images composing the stick and button visuals are provided and can be customized. If they're missing at runtime, these defaults are used.
