@@ -7,7 +7,7 @@ using System.IO;
 using System.Reflection;
 using System.Runtime.InteropServices;
 
-namespace input_display
+namespace sticky_viewer
 {
     /// <summary>
     /// Access functionality from user32.dll

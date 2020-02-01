@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace input_display
+namespace sticky_viewer
 {
 #if WINDOWS || LINUX
     /// <summary>
