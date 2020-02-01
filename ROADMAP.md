@@ -13,7 +13,7 @@ These are the plans for what I want to be customizable via .config modification 
 - Override images for specific buttons ☐
 	- e.g. something like this:
 	
-	![overriding a specific button image with a custom one](https://i.imgur.com/3IvE2Jy.png)
+	![overriding a specific button image with a custom one](https://i.imgur.com/QU5pTDm.png)
 
 ### Stick
 
