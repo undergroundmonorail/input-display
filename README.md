@@ -1,4 +1,4 @@
-# input-display
+# Sticky Viewer
 simple fightstick input viewer
 
 currently supports only five buttons and only left and right stick directions, because i play fs and that's just the way it is i guess

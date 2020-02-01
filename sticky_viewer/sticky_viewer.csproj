@@ -10,8 +10,8 @@
     <ProjectGuid>{7D0FEB20-AB4F-4E57-AD69-CC88D4423F53}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>input_display</RootNamespace>
-    <AssemblyName>input_display</AssemblyName>
+    <RootNamespace>sticky_viewer</RootNamespace>
+    <AssemblyName>sticky_viewer</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <MonoGamePlatform>Windows</MonoGamePlatform>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
