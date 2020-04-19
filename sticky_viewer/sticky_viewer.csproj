@@ -57,6 +57,30 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <ContentWithTargetPath Include="Content\upleft.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <TargetPath>upleft.png</TargetPath>
+    </ContentWithTargetPath>
+    <ContentWithTargetPath Include="Content\up.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <TargetPath>up.png</TargetPath>
+    </ContentWithTargetPath>
+    <ContentWithTargetPath Include="Content\upright.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <TargetPath>upright.png</TargetPath>
+    </ContentWithTargetPath>
+    <ContentWithTargetPath Include="Content\downleft.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <TargetPath>downleft.png</TargetPath>
+    </ContentWithTargetPath>
+    <ContentWithTargetPath Include="Content\down.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <TargetPath>down.png</TargetPath>
+    </ContentWithTargetPath>
+    <ContentWithTargetPath Include="Content\downright.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <TargetPath>downright.png</TargetPath>
+    </ContentWithTargetPath>
     <ContentWithTargetPath Include="Content\left.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <TargetPath>left.png</TargetPath>
@@ -92,6 +116,12 @@
     <EmbeddedResource Include="Content\unpressed.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
+    <EmbeddedResource Include="Content\down.png" />
+    <EmbeddedResource Include="Content\downleft.png" />
+    <EmbeddedResource Include="Content\downright.png" />
+    <EmbeddedResource Include="Content\up.png" />
+    <EmbeddedResource Include="Content\upleft.png" />
+    <EmbeddedResource Include="Content\upright.png" />
     <Content Include="Icon.ico" />
   </ItemGroup>
   <ItemGroup>

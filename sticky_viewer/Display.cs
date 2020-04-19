@@ -31,6 +31,12 @@ namespace sticky_viewer
         private Texture2D pressed;
         private Texture2D unpressed;
 
+        private Texture2D upleft;
+        private Texture2D up;
+        private Texture2D upright;
+        private Texture2D downleft;
+        private Texture2D down;
+        private Texture2D downright;
         private Texture2D left;
         private Texture2D neutral;
         private Texture2D right;
@@ -66,6 +72,27 @@ namespace sticky_viewer
             base.Initialize();
         }
 
+        Stream GetStreamFromFileOrAssembly(Assembly assembly, string s)
+        {
+            try
+            {
+                return new FileStream($"{s}.png", FileMode.Open);
+            }
+            catch
+            {
+                // uh oh,! time to panic
+                return assembly.GetManifestResourceStream(assembly.GetName().Name.Replace(' ', '_') + $".Content.{s}.png");
+            }
+        }
+
+        Texture2D GetTexture(Assembly assembly, string s)
+        {
+            using (Stream stream = GetStreamFromFileOrAssembly(assembly, s))
+            {
+                return Texture2D.FromStream(GraphicsDevice, stream);
+            }
+        }
+
         /// <summary>
         /// LoadContent will be called once per game and is the place to load
         /// all of your content.
@@ -77,7 +104,7 @@ namespace sticky_viewer
             int hWndInsertAfter = User32.HWND_TOPMOST;
             int w = graphics.PreferredBackBufferWidth;
             int h = graphics.PreferredBackBufferHeight;
-            int x = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width/2 - w/2;
+            int x = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width / 2 - w / 2;
             int y = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height - h;
 
             User32.SetWindowPos(hWnd, hWndInsertAfter, x, y, w, h, 0);
@@ -85,66 +112,20 @@ namespace sticky_viewer
             // default images
             Assembly assembly = Assembly.GetExecutingAssembly();
 
-            Stream dataStream = assembly.GetManifestResourceStream(assembly.GetName().Name.Replace(' ', '_') + ".Content.left.png");
-            left = Texture2D.FromStream(GraphicsDevice, dataStream);
-            dataStream.Dispose();
-
-            dataStream = assembly.GetManifestResourceStream(assembly.GetName().Name.Replace(' ', '_') + ".Content.neutral.png");
-            neutral = Texture2D.FromStream(GraphicsDevice, dataStream);
-            dataStream.Dispose();
-
-            dataStream = assembly.GetManifestResourceStream(assembly.GetName().Name.Replace(' ', '_') + ".Content.right.png");
-            right = Texture2D.FromStream(GraphicsDevice, dataStream);
-            dataStream.Dispose();
-
-            dataStream = assembly.GetManifestResourceStream(assembly.GetName().Name.Replace(' ', '_') + ".Content.pressed.png");
-            pressed = Texture2D.FromStream(GraphicsDevice, dataStream);
-            dataStream.Dispose();
-
-            dataStream = assembly.GetManifestResourceStream(assembly.GetName().Name.Replace(' ', '_') + ".Content.unpressed.png");
-            unpressed = Texture2D.FromStream(GraphicsDevice, dataStream);
-            dataStream.Dispose();
+            pressed = GetTexture(assembly, "pressed");
+            unpressed = GetTexture(assembly, "unpressed");
+            upleft = GetTexture(assembly, "upleft");
+            up = GetTexture(assembly, "up");
+            upright = GetTexture(assembly, "upright");
+            left = GetTexture(assembly, "left");
+            neutral = GetTexture(assembly, "neutral");
+            right = GetTexture(assembly, "right");
+            downleft = GetTexture(assembly, "downleft");
+            down = GetTexture(assembly, "down");
+            downright = GetTexture(assembly, "downright");
 
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
-
-            // If an image file exists, replace the one in memory with it
-            FileStream fileStream;
-
-            if (File.Exists("pressed.png"))
-            {
-                fileStream = new FileStream("pressed.png", FileMode.Open);
-                pressed = Texture2D.FromStream(GraphicsDevice, fileStream);
-                fileStream.Dispose();
-            }
-
-            if (File.Exists("unpressed.png"))
-            {
-                fileStream = new FileStream("unpressed.png", FileMode.Open);
-                unpressed = Texture2D.FromStream(GraphicsDevice, fileStream);
-                fileStream.Dispose();
-            }
-
-            if (File.Exists("left.png"))
-            {
-                fileStream = new FileStream("left.png", FileMode.Open);
-                left = Texture2D.FromStream(GraphicsDevice, fileStream);
-                fileStream.Dispose();
-            }
-
-            if (File.Exists("neutral.png"))
-            {
-                fileStream = new FileStream("neutral.png", FileMode.Open);
-                neutral = Texture2D.FromStream(GraphicsDevice, fileStream);
-                fileStream.Dispose();
-            }
-
-            if (File.Exists("right.png"))
-            {
-                fileStream = new FileStream("right.png", FileMode.Open);
-                right = Texture2D.FromStream(GraphicsDevice, fileStream);
-                fileStream.Dispose();
-            }
         }
 
         /// <summary>
@@ -168,13 +149,41 @@ namespace sticky_viewer
                 Exit();
             }
 
-            if (GamePad.GetState(PlayerIndex.One).DPad.Left == ButtonState.Pressed)
+            GamePadDPad dpad = GamePad.GetState(PlayerIndex.One).DPad;
+
+            if (dpad.Up == ButtonState.Pressed && dpad.Left == ButtonState.Pressed)
+            {
+                stick = upleft;
+            }
+            else if (dpad.Up == ButtonState.Pressed && dpad.Right == ButtonState.Pressed)
+            {
+                stick = upright;
+            }
+            else if (dpad.Up == ButtonState.Pressed)
+            {
+                stick = up;
+            }
+            else if (dpad.Down == ButtonState.Pressed && dpad.Left == ButtonState.Pressed)
+            {
+                stick = downleft;
+            }
+            else if (dpad.Down == ButtonState.Pressed && dpad.Right == ButtonState.Pressed)
+            {
+                stick = downright;
+            }
+            else if (dpad.Down == ButtonState.Pressed)
+            {
+                stick = down;
+            }
+            else if (dpad.Left == ButtonState.Pressed)
             {
                 stick = left;
-            } else if (GamePad.GetState(PlayerIndex.One).DPad.Right == ButtonState.Pressed)
+            }
+            else if (dpad.Right == ButtonState.Pressed)
             {
                 stick = right;
-            } else
+            }
+            else
             {
                 stick = neutral;
             }
@@ -212,7 +221,7 @@ namespace sticky_viewer
 
             spriteBatch.Begin();
 
-            spriteBatch.Draw(stick, new Vector2(16, 24), Color.White);
+            spriteBatch.Draw(stick, new Vector2(21, 16), Color.White);
             spriteBatch.Draw(A, new Vector2(96, 11), Color.White);
             spriteBatch.Draw(B, new Vector2(128, 6), Color.White);
             spriteBatch.Draw(C, new Vector2(161, 6), Color.White);
