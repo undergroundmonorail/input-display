@@ -2,7 +2,7 @@
 
 A simple XInput input viewer designed for fightsticks. Appears always-on-top.
 
-Currently, configuration is quite limited. Check ROADMAP.md for planned updates. Most notably, exactly five remappable buttons and only left and right stick directions are supported right now, because I play Fantasy Strike and that was my priority. :P
+Currently, configuration is quite limited. Check ROADMAP.md for planned updates. Most notably, exactly five remappable buttons ~~and only left and right stick directions~~ are supported right now, because I play Fantasy Strike and that was my priority. :P **UPDATE: we got all nine valid stick positions babey**
 
 To remap buttons, open sticky_viewer.exe.config and modify the values there. If the configuration file is missing at runtime, the values used in the unmodified file are the defaults.
 
