@@ -33,7 +33,8 @@ These are the plans for what I want to be customizable via .config modification 
 ## Misc
 
 - Optionally assign "close" keybind to a combination of stick buttons ☐
-- Choose an XInput device instead of defaulting to whichever one is considered player 1 ☐
-	- "Press Start" prompt if ambiguous, save to config file?
+- Choose an XInput device instead of defaulting to whichever one is considered player 1 🗹
+	- ~~"Press Start" prompt if ambiguous, save to config file?~~
+	- Every frame, just use the controller with the lowest index and any input
 - Keybinds to generate .config file and default images in execution folder ☐
 	- This would allow the distribution of just the .exe file. If someone wishes to customize, those default resources could be generated from the program

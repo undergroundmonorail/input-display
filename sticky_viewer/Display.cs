@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.IO;
@@ -47,7 +48,6 @@ namespace sticky_viewer
         private Texture2D C;
         private Texture2D J;
         private Texture2D S;
-
         public Display()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -149,7 +149,15 @@ namespace sticky_viewer
                 Exit();
             }
 
-            GamePadDPad dpad = GamePad.GetState(PlayerIndex.One).DPad;
+            // Find the controller being used currently
+            GamePadState emptyInput = new GamePadState();
+            GamePadState currentState = new GamePadState();
+            foreach (PlayerIndex p in Enum.GetValues(typeof(PlayerIndex)))
+            {
+                if ((currentState = GamePad.GetState(p)) != emptyInput) { break; }
+            }
+
+            GamePadDPad dpad = currentState.DPad;
 
             if (dpad.Up == ButtonState.Pressed && dpad.Left == ButtonState.Pressed)
             {
@@ -187,8 +195,6 @@ namespace sticky_viewer
             {
                 stick = neutral;
             }
-
-            GamePadState currentState = GamePad.GetState(PlayerIndex.One);
 
             Dictionary<string, bool> inputs = new Dictionary<string, bool>()
             {
